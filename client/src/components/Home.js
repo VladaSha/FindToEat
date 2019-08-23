@@ -25,6 +25,7 @@ export default class Home extends Component {
 
     updateFavList = (user) => {
         debugger
+        //there is an unstable bug here
         auth.setUser(user)
         .then(() => {
             this.setState({listOfFavorites: auth.getUser().favoriteRecipes})
@@ -53,6 +54,7 @@ export default class Home extends Component {
     render() {
         // loop over the array of recipes and create recipeItem
         let recipeItem = []
+        let loggedIn = auth.loggedIn()
         if(this.state.recipes) {
             this.state.recipes.forEach((recipe) => {
                 //if we have favourites
@@ -74,6 +76,7 @@ export default class Home extends Component {
                                   totalTime={recipe.recipe.totalTime}
                                   updateFavList={this.updateFavList}
                                   isItFav={true}
+                                  loggedIn={loggedIn}
                                 />
                             )
                             break
@@ -92,6 +95,7 @@ export default class Home extends Component {
                                   url={recipe.recipe.url}
                                   totalTime={recipe.recipe.totalTime}
                                   updateFavList={this.updateFavList}
+                                  loggedIn={loggedIn}
                                 />
                               )
                             break
@@ -113,6 +117,7 @@ export default class Home extends Component {
                     url={recipe.recipe.url}
                     totalTime={recipe.recipe.totalTime}
                     updateFavList={this.updateFavList}
+                    loggedIn={loggedIn}
                   />
                 )
                 }

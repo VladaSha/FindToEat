@@ -48,18 +48,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //protected routes
 let protectedRoute = (req, res, next) => {
+  debugger
   if(!req.session.currentUser)
    next(createError(403))
   else
    next()
 }
 
-app.use('/auth', require('./routes/login'));
-app.use('/auth', require('./routes/logout'));
-app.use('/auth', require('./routes/signup'));
-app.use('/', protectedRoute, require('./routes/saveToFav'))
+app.use('/api/auth', require('./routes/login'));
+app.use('/api/auth', require('./routes/logout'));
+app.use('/api/auth', require('./routes/signup'));
+app.use('/api', protectedRoute, require('./routes/saveToFav'))
 // app.use('/profile', protectedRoute, require('./routes/profile'));
 
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -68,6 +73,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  debugger
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

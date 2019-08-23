@@ -7,7 +7,7 @@ export default class RecipeItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // favedClass: ""
+            // updateComponent: false
         }
 
         // This binding is necessary to make `this` work in the callback
@@ -43,10 +43,10 @@ export default class RecipeItem extends Component {
       } 
 
       delFromFav() {
+          debugger
       }
 
-    //   componentDidMount() {
-    //   }
+
 
     render() {
         return (
@@ -77,10 +77,13 @@ export default class RecipeItem extends Component {
                 {/* if recipe is already saved, show the delFromFav button */}
                 {/* if recipe is not saved, show saveToFav button */}
 
-                { this.props.ifItFav ?
+                { this.props.loggedIn ?
+                (this.props.isItFav ?
                 <button className='faved' onClick={this.delFromFav}>EatIt</button>
                 :
-                <button onClick={this.saveToFav}>EatIt</button>
+                <button onClick={this.saveToFav}>EatIt</button>)
+                : <button className='disabledBtn' disabled="disabled" title="Please log in">EatIt</button>
+
                 }
 
             </div>

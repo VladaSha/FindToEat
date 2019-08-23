@@ -5,7 +5,7 @@ const User = require("../models/User")
 const Recipe = require("../models/Recipe")
 
 router.post("/favorite", (req,res,next) => {
-    
+    debugger
     let cleanNutrients = req.body.totalNutrients
     if(cleanNutrients["SUGAR.added"]) delete cleanNutrients["SUGAR.added"]
     let newRecipe = {

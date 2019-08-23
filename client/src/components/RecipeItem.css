@@ -42,6 +42,10 @@ button{
     background-color: green
 }
 
+.disabledBtn {
+    background-color: lightgray
+}
+
 .container{
     display: flex;
 }
